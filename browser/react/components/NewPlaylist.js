@@ -51,7 +51,7 @@ render () {
           <div className="form-group">
             <div className="col-xs-10 col-xs-offset-2">
               <button type="submit" className="btn btn-success"
-              disabled={!this.isEnabled}
+              disabled={this.state.input.length >= 16}
               >Create Playlist</button>
             </div>
           </div>
