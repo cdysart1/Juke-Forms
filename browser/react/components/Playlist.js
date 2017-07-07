@@ -11,17 +11,30 @@ export default class Playlist extends Component {
     this.state = {
       playlist: {}
     }
+    this.fetchPlaylistById = this.fetchPlaylistById.bind(this);
   }
 
-  componentDidMount() {
-    const playlistId = this.props.match.params.playlistId;
-
+  fetchPlaylistById(playlistId) {
     axios.get(`/api/playlists/${playlistId}`)
       .then(res => res.data)
       .then(playlist => {
         this.setState({ playlist: playlist });
       });
   }
+
+  componentDidMount() {
+    const playlistId = this.props.match.params.playlistId;
+    this.fetchPlaylistById(playlistId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextPlaylistId = nextProps.match.params.playlistId;
+    const currentPlaylistId = this.props.match.params.playlistId;
+    if (nextPlaylistId !== currentPlaylistId) {
+      this.fetchPlaylistById(nextPlaylistId);
+    }
+  }
+
 
   render() {
     const playlist = this.state.playlist;
