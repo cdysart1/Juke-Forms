@@ -16,17 +16,38 @@ const Sidebar = (props) => {
           <Link to="/artists">ARTISTS</Link>
         </h4>
       </section>
-        <hr />
-        <section>
-          <h4 className="text-muted">PLAYLISTS</h4>
-          <h4>
-            <Link className="btn btn-primary btn-block" to="/new-playlist">
-              <span className="glyphicon glyphicon-plus"></span> PLAYLIST
+      <hr />
+      <section>
+        <h4 className="text-muted">PLAYLISTS</h4>
+        <h4>
+          <Link className="btn btn-primary btn-block" to="/new-playlist">
+            <span className="glyphicon glyphicon-plus"></span> PLAYLIST
            </Link>
-          </h4>
+        </h4>
+        <hr />
+        <ul className="list-unstyled">
+          {
+            props.playlists.map(playlist => {
+              return (
+                <li key={playlist.id} className="playlist-item menu-item">
+                  <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                </li>
+              );
+            })
+          }
+
+
+        </ul>
       </section>
     </sidebar>
   );
 }
 
 export default Sidebar;
+
+  //  <li className="playlist-item menu-item">
+  //           <Link to="FILL_ME_IN">some playlist</Link>
+  //         </li>
+  //         <li className="playlist-item menu-item">
+  //           <Link to="WHERE_TO_GO">another playlist</Link>
+  //         </li>

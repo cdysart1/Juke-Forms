@@ -13,7 +13,7 @@ export default class AllArtists extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
+ componentDidMount() {
     axios.get('/api/artists')
       .then(res => res.data)
       .then(artists => this.setState({ artists }));
